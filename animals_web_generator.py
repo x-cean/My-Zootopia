@@ -9,27 +9,36 @@ def load_data(file_path):
         return json.load(handle)
 
 
+def serialize_animal(animal_obj):
+    """
+    receives a dictionary and return its info as formatted html text
+    """
+    animal_data_text = "<li class='cards__item'>"
+    if "name" in animal_obj:
+        animal_data_text += f"<div class='card__title'>{animal_obj["name"]}</div>\n"
+    animal_data_text += "<p class='card__text'>"
+    if "characteristics" in animal_obj and "diet" in animal_obj["characteristics"]:
+        animal_data_text += f"<strong>Diet: </strong>{animal_obj["characteristics"]["diet"]}<br/>\n"
+    if "locations" in animal_obj and len(animal_obj["locations"]) > 0:
+        animal_data_text += f"<strong>Location: </strong>{animal_obj["locations"][0]}<br/>\n"
+    if "characteristics" in animal_obj and "type" in animal_obj["characteristics"]:
+        animal_data_text += f"<strong>Type: </strong>{animal_obj["characteristics"]["type"]}<br/>\n"
+    animal_data_text += "</p></li>"
+    return animal_data_text
+
+
 def generate_animal_data_string(file_path):
     """
     returning organized text as string from a json file carrying nested data structure
     """
-    animal_data_text = ""
+    output = ""
     # get the data
     animals_data = load_data(file_path)
     # loop through and collect info for each animal, update the text
     for animal in animals_data:
-        animal_data_text += "<li class='cards__item'>"
-        if "name" in animal:
-            animal_data_text += f"Name: {animal["name"]}<br/>\n"
-        if "characteristics" in animal and "diet" in animal["characteristics"]:
-            animal_data_text += f"Characteristics: {animal["characteristics"]["diet"]}<br/>\n"
-        if "locations" in animal and len(animal["locations"]) > 0:
-            animal_data_text += f"Locations: {animal["locations"][0]}<br/>\n"
-        if "characteristics" in animal and "type" in animal["characteristics"]:
-            animal_data_text += f"Type: {animal["characteristics"]["type"]}<br/>\n"
-        animal_data_text += "</li>"
+        output += serialize_animal(animal)
     # return text string
-    return animal_data_text
+    return output
 
 
 def read_html(file_path):
