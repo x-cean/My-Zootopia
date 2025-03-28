@@ -16,14 +16,16 @@ def serialize_animal(animal_obj):
     animal_data_text = "<li class='cards__item'>"
     if "name" in animal_obj:
         animal_data_text += f"<div class='card__title'>{animal_obj["name"]}</div>\n"
-    animal_data_text += "<p class='card__text'>"
+    animal_data_text += "<div class='card__text'>\n<ul>"
     if "characteristics" in animal_obj and "diet" in animal_obj["characteristics"]:
-        animal_data_text += f"<strong>Diet: </strong>{animal_obj["characteristics"]["diet"]}<br/>\n"
+        animal_data_text += f"<li><strong>Diet: </strong>{animal_obj["characteristics"]["diet"]}</li>\n"
     if "locations" in animal_obj and len(animal_obj["locations"]) > 0:
-        animal_data_text += f"<strong>Location: </strong>{animal_obj["locations"][0]}<br/>\n"
+        animal_data_text += f"<li><strong>Location: </strong>{animal_obj["locations"][0]}</li>\n"
     if "characteristics" in animal_obj and "type" in animal_obj["characteristics"]:
-        animal_data_text += f"<strong>Type: </strong>{animal_obj["characteristics"]["type"]}<br/>\n"
-    animal_data_text += "</p></li>"
+        animal_data_text += f"<li><strong>Type: </strong>{animal_obj["characteristics"]["type"]}</li>\n"
+    if "characteristics" in animal_obj and "slogan" in animal_obj["characteristics"]:
+        animal_data_text += f"<li><strong>Slogan: </strong>{animal_obj["characteristics"]["slogan"]}</li>\n"
+    animal_data_text += "</ul></div></li>"
     return animal_data_text
 
 
