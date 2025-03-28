@@ -18,14 +18,16 @@ def generate_animal_data_string(file_path):
     animals_data = load_data(file_path)
     # loop through and collect info for each animal, update the text
     for animal in animals_data:
+        animal_data_text += "<li class='cards__item'>"
         if "name" in animal:
-            animal_data_text += f"Name: {animal['name']}\n"
+            animal_data_text += f"Name: {animal["name"]}<br/>\n"
         if "characteristics" in animal and "diet" in animal["characteristics"]:
-            animal_data_text += f"Characteristics: {animal["characteristics"]["diet"]}\n"
+            animal_data_text += f"Characteristics: {animal["characteristics"]["diet"]}<br/>\n"
         if "locations" in animal and len(animal["locations"]) > 0:
-            animal_data_text += f"Locations: {animal["locations"][0]}\n"
+            animal_data_text += f"Locations: {animal["locations"][0]}<br/>\n"
         if "characteristics" in animal and "type" in animal["characteristics"]:
-            animal_data_text += f"Type: {animal["characteristics"]["type"]}\n"
+            animal_data_text += f"Type: {animal["characteristics"]["type"]}<br/>\n"
+        animal_data_text += "</li>"
     # return text string
     return animal_data_text
 
@@ -55,5 +57,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
