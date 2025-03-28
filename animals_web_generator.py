@@ -106,6 +106,9 @@ def update_animal_html(old_str, new_str):
 
 
 def main():
+    """
+    get animal info from a json file, select skin type, and display animal data in a html file
+    """
     animals_data = load_data(FILE_PATH)
     skin_types = get_and_display_skin_types_from_data(animals_data)
     skin_type = get_skin_type_from_user(skin_types)
